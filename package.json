@@ -1,0 +1,19 @@
+{
+  "name": "build-your-own-session-middleware",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.5.1",
+    "koa-session-minimal": "^3.0.4"
+  }
+}

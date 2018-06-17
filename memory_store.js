@@ -1,0 +1,30 @@
+module.exports = class MemoryStore {
+  constructor () {
+    this.store = {};
+    this.timers = {};
+  }
+
+  get (sid) {
+    if (!sid) return undefined;
+    return this.store[sid];
+  }
+
+  set (sid, value, ttl) {
+    if (this.store[sid]) clearTimeout(this.timers[sid]);
+
+    this.store[sid] = value;
+    this.timers[sid] = setTimeout(() => {
+      Reflect.deleteProperty(this.store, sid);
+      Reflect.deleteProperty(this.timers, sid);
+    }, +ttl);
+  }
+
+  destory () {
+    Object.keys(this.timers).forEach((sid) => {
+      clearTimeout(this.timers[sid]);
+    });
+
+    this.store = {};
+    this.timers = {};
+  }
+};
