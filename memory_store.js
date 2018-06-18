@@ -19,12 +19,10 @@ module.exports = class MemoryStore {
     }, +ttl);
   }
 
-  destory () {
-    Object.keys(this.timers).forEach((sid) => {
-      clearTimeout(this.timers[sid]);
-    });
+  destory (sid) {
+    clearTimeout(this.timers[sid]);
 
-    this.store = {};
-    this.timers = {};
+    Reflect.deleteProperty(this.store, sid);
+    Reflect.deleteProperty(this.timers, sid);
   }
 };
